@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Auto Click tvw-essence Elements
+// @name         Auto Click and Refresh tvw-essence Elements
 // @namespace    http://tampermonkey.net/
 // @version      1.0
-// @description  Automatically clicks on elements with 'tvw-essence' in their class on Neopets
+// @description  Automatically clicks on elements with 'tvw-essence' in their class and refreshes the page after clicking
 // @author       YourName
 // @match        *://www.neopets.com/*
 // @grant        none
@@ -22,15 +22,15 @@
             if (element.offsetParent !== null) {
                 element.click();
                 console.log('Clicked on:', element);
+
+                // Refresh the page after clicking the first element
+                setTimeout(function() {
+                    location.reload();  // Refresh the page after 1 second
+                }, 1000);
+
+                return;  // Stop after the first click to prevent multiple refreshes
             }
         });
     }
 
-    // Wait for the page to load before running the script
-    window.addEventListener('load', function() {
-        setTimeout(clickElementsWithClass, 2000);  // Delay to make sure page elements are fully loaded
-    });
-
-    // Optionally, repeat the action periodically (every 5 seconds in this case)
-    setInterval(clickElementsWithClass, 5000);
-})();
+    // Wait for the page to load before running
