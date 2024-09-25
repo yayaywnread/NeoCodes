@@ -1,0 +1,36 @@
+// ==UserScript==
+// @name         Auto Click tvw-essence Elements
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Automatically clicks on elements with 'tvw-essence' in their class on Neopets
+// @author       YourName
+// @match        *://www.neopets.com/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Function to click elements with 'tvw-essence' class
+    function clickElementsWithClass() {
+        // Get all elements that contain 'tvw-essence' in their class
+        var elements = document.querySelectorAll('[class*="tvw-essence"]');
+
+        // Loop through all elements and click them
+        elements.forEach(function(element) {
+            // Check if the element is visible and clickable
+            if (element.offsetParent !== null) {
+                element.click();
+                console.log('Clicked on:', element);
+            }
+        });
+    }
+
+    // Wait for the page to load before running the script
+    window.addEventListener('load', function() {
+        setTimeout(clickElementsWithClass, 2000);  // Delay to make sure page elements are fully loaded
+    });
+
+    // Optionally, repeat the action periodically (every 5 seconds in this case)
+    setInterval(clickElementsWithClass, 5000);
+})();
